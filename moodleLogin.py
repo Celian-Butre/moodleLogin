@@ -9,7 +9,7 @@ keyboard = Controller()
 
 typed_characters = []
 
-image_list = ["logIn.png", "sudParis.png", "casLogin.png", "pageDown.png", "lastStep.png"]
+image_list = ["logIn.png", "sudParis.png", "casLogin.png", "pageDown.png", "lastStep.png", "dontSave.png", "LogInVert.png"]
 
 def backspace():
     keyboard.press(Key.backspace)
@@ -35,7 +35,7 @@ def login():
         screenshot = pyautogui.screenshot(screenshot_path)
         #print("hehe")
         for frame in image_list:
-            match_location = pyautogui.locate(needleImage = str(os.path.dirname(os.path.abspath(__file__)) + "/cropped/" + frame), haystackImage = screenshot_path)
+            match_location = pyautogui.locate(needleImage = str(os.path.dirname(os.path.abspath(__file__)) + "/cropped/" + frame), haystackImage = screenshot_path, confidence = 0.99)
 
 
     # If the image is found, match_location will contain its coordinates
@@ -62,6 +62,7 @@ def on_press(key):
             typed_text = (''.join(typed_characters)).lower()
             #print (typed_text)
             if 'mood' in typed_text:
+                typed_characters = []
                 login()
                 # You can add your handling logic here (e.g., prevent further input)
 
